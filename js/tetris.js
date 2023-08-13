@@ -1,26 +1,4 @@
-/*
 
-  ____          _____               _ _           _       
- |  _ \        |  __ \             (_) |         | |      
- | |_) |_   _  | |__) |_ _ _ __ _____| |__  _   _| |_ ___ 
- |  _ <| | | | |  ___/ _` | '__|_  / | '_ \| | | | __/ _ \
- | |_) | |_| | | |  | (_| | |   / /| | |_) | |_| | ||  __/
- |____/ \__, | |_|   \__,_|_|  /___|_|_.__/ \__, |\__\___|
-         __/ |                               __/ |        
-        |___/                               |___/         
-    
-____________________________________
-/ Si necesitas ayuda, contáctame en \
-\ https://parzibyte.me               /
- ------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-Creado por Parzibyte (https://parzibyte.me). Este encabezado debe mantenerse intacto,
-excepto si este es un proyecto de un estudiante.
-*/
 class Game {
     // Square length in pixels
     static SQUARE_LENGTH = screen.width > 420 ? 30 : 20;
@@ -98,19 +76,16 @@ class Game {
     }
 
     showWelcome() {
-        Swal.fire("Bienvenido", `Port casi perfecto del juego de Tetris en JavaScript.
+        Swal.fire("Welcome", `Nearly perfect port of the Tetris game in JavaScript.
 <br>
-<strong>Controles:</strong>
+<strong>Controls:</strong>
+
 <ul class="list-group">
-<li class="list-group-item"> <kbd>P</kbd><br>Pausar o reanudar </li>
-<li class="list-group-item"> <kbd>R</kbd><br>Rotar</li>
-<li class="list-group-item"> <kbd>Flechas de dirección</kbd><br>Mover figura hacia esa dirección</li>
-<li class="list-group-item"><strong>También puedes usar los botones si estás en móvil</strong></li>
+<li class="list-group-item"> <kbd>P</kbd><br>Pause or Resume </li>
+<li class="list-group-item"> <kbd>R</kbd><br>Rotate</li>
+<li class="list-group-item"> <kbd>Arrow keys</kbd><br>Move the figure in that direction</li>
+<li class="list-group-item"><strong>You can also use the buttons if you're on mobile</strong></li>
 </ul>
-<strong>Creado por <a href="https://parzibyte.me/blog">Parzibyte</a></strong>
-<br>
-Gracias a <a target="_blank" href="https://www.youtube.com/channel/UCz6zvgkf6eKpgqlUZQstOtQ">Bulby</a> por la música de fondo
-y a <a href="https://freesound.org/people/grunz/sounds/109662/">Freesound.org</a> por el sonido al completar una línea
 `);
     }
 
@@ -347,7 +322,7 @@ y a <a href="https://freesound.org/people/grunz/sounds/109662/">Freesound.org</a
                 this.sounds.tap.play();
                 this.moveFigurePointsToExistingPieces();
                 if (this.playerLoses()) {
-                    Swal.fire("Juego terminado", "Inténtalo de nuevo");
+                    Swal.fire("Game Over", "Try again");
                     this.sounds.background.pause();
                     this.canPlay = false;
                     this.resetGame();
@@ -422,13 +397,13 @@ y a <a href="https://freesound.org/people/grunz/sounds/109662/">Freesound.org</a
 
     initDomElements() {
         this.$canvas = document.querySelector("#" + this.canvasId);
-        this.$score = document.querySelector("#puntaje");
-        this.$btnPause = document.querySelector("#btnPausar");
-        this.$btnResume = document.querySelector("#btnIniciar");
-        this.$btnRotate = document.querySelector("#btnRotar");
-        this.$btnDown = document.querySelector("#btnAbajo");
-        this.$btnRight = document.querySelector("#btnDerecha");
-        this.$btnLeft = document.querySelector("#btnIzquierda");
+        this.$score = document.querySelector("#score");
+        this.$btnPause = document.querySelector("#btnPause");
+        this.$btnResume = document.querySelector("#btnResume");
+        this.$btnRotate = document.querySelector("#btnRotate");
+        this.$btnDown = document.querySelector("#btnDown");
+        this.$btnRight = document.querySelector("#btnRight");
+        this.$btnLeft = document.querySelector("#btnLeft");        
         this.$canvas.setAttribute("width", Game.CANVAS_WIDTH + "px");
         this.$canvas.setAttribute("height", Game.CANVAS_HEIGHT + "px");
         this.canvasContext = this.$canvas.getContext("2d");
@@ -667,14 +642,14 @@ y a <a href="https://freesound.org/people/grunz/sounds/109662/">Freesound.org</a
     async askUserConfirmResetGame() {
         this.pauseGame();
         const result = await Swal.fire({
-            title: 'Reiniciar',
-            text: "¿Quieres reiniciar el juego?",
+            title: 'Restart',
+            text: "Do you want to restart the game?",
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#fdbf9c',
             cancelButtonColor: '#4A42F3',
             cancelButtonText: 'No',
-            confirmButtonText: 'Sí'
+            confirmButtonText: 'Yes'
         });
         if (result.value) {
             this.resetGame();
